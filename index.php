@@ -27,12 +27,7 @@ $products = array (
 $totalValue = 0;
 
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
+
 
   
 
@@ -54,13 +49,13 @@ function validate()
   $errors =array();
 
 
- if ($_POST == true) { //  if form submitted with post method
-                                              // then do validation
+ if ($_POST == true) { //  if form submitted with post method  // then do validation
+                                              
     if (empty($_POST["email"])) {  // if empty ? 
       $email_error = "you must add your email";
       $errors[] = $email_error;
     } else {
-      $email = test_input($_POST["email"]); // checck validation .. 
+      $email =($_POST["email"]); // checck validation .. 
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $email_error = "Invalid email format";
         $errors[] = $email_error;
@@ -72,7 +67,7 @@ function validate()
       $street_error = "you must add your street name";
       $errors[] = $street_error;
     } else {
-      $street = test_input($_POST["street"]);
+      $street =(($_POST["street"]));
       
     }
 
@@ -80,7 +75,7 @@ function validate()
       $street_num_error = "you must add your street number";
       $errors[] = $street_num_error;
     } else {
-      $street_num = test_input($_POST["streetNumber"]);
+      $street_num =($_POST["streetNumber"]);
       
     }
 
@@ -88,7 +83,7 @@ function validate()
       $zipcode_error = "you must add your zipcode";
       $errors[] = $zipcode_error;
     } else {
-      $zipcode = test_input($_POST["zipcode"]);
+      $zipcode =($_POST["zipcode"]);
       
     }
 
@@ -129,7 +124,8 @@ function handleForm()
   else {
     // handle successful 
     print_r("<h4 style=color:green;>".implode($orders) ."</h4>". 
-    "<h3 style=color:green;> to your delivery address ". $_POST["street"] . "</h4>");
+    "<h3 style=color:green;> to your delivery address "."((". 
+    $_POST["street"] . " " . $_POST["streetNumber"]. " " .$_POST["city"] . " " . $_POST["zipcode"]."))". "</h4>");
 
    
 
@@ -167,3 +163,7 @@ whatIsHappening();
 setcookie("totalValue", strval($totalValue));
 
 require 'form-view.php';
+
+
+
+?>
