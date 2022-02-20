@@ -29,21 +29,21 @@ $totalValue = 0;
 
 
 
-  
+  function validate()
+  {
 
-function validate()
-{
-    // This function will send a list of invalid fields back
-    $street =""; 
-    $email ="";
-    $street_num =""; 
-    $zipcode = "";
+    // $street =""; 
+    // $email ="";
+    // $street_num =""; 
+    // $zipcode = "";
+    $street = $email = $street_num = $zipcode = ""; // shortcut the sourse is (w3schools) .. 
 
-    $street_error =""; 
-    $email_error =""; 
-    $street_num_error =""; 
-    $zipcode_error =""; 
-    $products_error = "";
+    // $street_error =""; 
+    // $email_error =""; 
+    // $street_num_error =""; 
+    // $zipcode_error =""; 
+    // $products_error = "";
+    $street_error=$email_error=$street_num_error=$zipcode_error=$products_error= "";
 
   
   $errors =array();
@@ -56,7 +56,8 @@ function validate()
       $errors[] = $email_error;
     } else {
       $email =($_POST["email"]); // checck validation .. 
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $email = filter_var($email , FILTER_SANITIZE_EMAIL); // Remove all illegal characters
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { //if the e-mail address is not well-formed, then store an error message
         $email_error = "Invalid email format";
         $errors[] = $email_error;
       }
@@ -149,7 +150,10 @@ if ($formSubmitted) {
 
 function whatIsHappening() {
     echo '<h5>$_GET</h5>';
+  
     var_dump($_GET);
+    
+    
     echo '<h5>$_POST</h5>';
     var_dump($_POST);
     echo '<h5>$_COOKIE</h5>';
