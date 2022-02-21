@@ -65,7 +65,7 @@
         <button type="submit" name="submit" class="btn btn-primary">Order!</button>
     </form>
 
-    <footer></footer>
+    <footer>total Price is :<?php echo $totalValue;?></footer>
 </div>
 
 <style>
